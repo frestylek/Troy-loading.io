@@ -1,57 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Sprawdzenie IP</title>
-</head>
 <body>
-  <script>
-    function checkIP() {
-      // Pobierz adres IP klienta
-      var ip = window.location.hostname;
-
-      // Otwórz plik z listą IP
-      var file = new File("ip.txt", "r");
-
-      // Przeczytaj zawartość pliku
-      var ips = file.readAsText();
-
-      // Zamknij plik
-      file.close();
-
-      // Rozdziel zawartość pliku na listę
-      var ipList = ips.split("\n");
-
-      // Sprawdź, czy adres IP klienta znajduje się na liście
-      var found = false;
-      for (var i = 0; i < ipList.length; i++) {
-        if (ipList[i] == ip) {
-          found = true;
-          break;
-        }
-      }
-
-      // Zwróc wynik
-      return found;
-    }
-  </script>
-
-  <h1>Sprawdzenie IP</h1>
-
-  <p>
-    Adres IP klienta: <span id="ip"></span>
-  </p>
-
-  <p>
-    Czy adres IP znajduje się na liście? <span id="result"></span>
-  </p>
-
-  <script>
-    // Wyświetl adres IP klienta
-    document.getElementById("ip").innerHTML = window.location.hostname;
-
-    // Wyświetl wynik sprawdzenia
-    document.getElementById("result").innerHTML = checkIP();
-  </script>
-</body>
-</html>
+	<script>
+	  function checkIP() {
+		// Pobierz adres IP klienta
+		var ip = getClientIP();
+  
+		// Otwórz plik z listą IP
+		var file = new File("ip.txt", "r");
+  
+		// Przeczytaj zawartość pliku
+		var ips = file.readAsText();
+  
+		// Zamknij plik
+		file.close();
+  
+		// Rozdziel zawartość pliku na listę
+		var ipList = ips.split("\n");
+  
+		// Sprawdź, czy adres IP klienta znajduje się na liście
+		var found = false;
+		for (var i = 0; i < ipList.length; i++) {
+		  if (ipList[i] == ip) {
+			found = true;
+			break;
+		  }
+		}
+  
+		// Zwróc wynik
+		return found;
+	  }
+  
+	  function onLoad() {
+		// Wyświetl wynik sprawdzenia
+		document.getElementById("result").innerHTML = found ? "True" : "False";
+	  }
+	</script>
+  
+	<h1>Sprawdzenie IP</h1>
+  
+	<p id="result"></p>
+  </body>
