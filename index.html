@@ -1,39 +1,57 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta name="robots" content="noindex" />
-		<meta charset="utf-8" />
-		<title>SleekLoad</title>
-		<script type="text/javascript">
-			document.write(
-				'<link rel="stylesheet" href="css/sleek.css?' +
-					Math.random() +
-					'">'
-			);
-		</script>
-	</head>
-	<body>
-		<div id="video-container"></div>
-		<div id="player"></div>
-		<div id="overlay"></div>
-		<div id="header">
-			<div id="title"></div>
-			<div id="subtitle" data-lang="below_logo"></div>
-		</div>
-		<div id="status-container">
-			<span id="status-left" data-lang="loading"></span>
-			<span id="status-right">0%</span>
-			<div id="loading">
-				<div id="loading-progress"></div>
-			</div>
-			<div id="messages"></div>
-		</div>
-		<div id="enable-audio">Click here to enable music preview</div>
-		<div id="error-box"></div>
-		<div id="warn"></div>
-		<script src="js/vendor/objectFitPolyfill.min.js"></script>
-		<script src="js/vendor/jquery-2.1.1.min.js"></script>
-		<script src="js/vendor/jquery.backstretch.min.js"></script>
-		<script src="js/sleek.js"></script>
-	</body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sprawdzenie IP</title>
+</head>
+<body>
+  <script>
+    function checkIP() {
+      // Pobierz adres IP klienta
+      var ip = window.location.hostname;
+
+      // Otwórz plik z listą IP
+      var file = new File("ip.txt", "r");
+
+      // Przeczytaj zawartość pliku
+      var ips = file.readAsText();
+
+      // Zamknij plik
+      file.close();
+
+      // Rozdziel zawartość pliku na listę
+      var ipList = ips.split("\n");
+
+      // Sprawdź, czy adres IP klienta znajduje się na liście
+      var found = false;
+      for (var i = 0; i < ipList.length; i++) {
+        if (ipList[i] == ip) {
+          found = true;
+          break;
+        }
+      }
+
+      // Zwróc wynik
+      return found;
+    }
+  </script>
+
+  <h1>Sprawdzenie IP</h1>
+
+  <p>
+    Adres IP klienta: <span id="ip"></span>
+  </p>
+
+  <p>
+    Czy adres IP znajduje się na liście? <span id="result"></span>
+  </p>
+
+  <script>
+    // Wyświetl adres IP klienta
+    document.getElementById("ip").innerHTML = window.location.hostname;
+
+    // Wyświetl wynik sprawdzenia
+    document.getElementById("result").innerHTML = checkIP();
+  </script>
+</body>
 </html>
